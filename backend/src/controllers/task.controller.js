@@ -1,10 +1,15 @@
-const { get } = require('../app');
+const { get, search } = require('../app');
 const Task = require('../models/task.model');
 const taskSchema = require('../validations/task.schema');
 
 const taskController = {
     getAllTasks: async (req, res) => {
         const { completed } = req.query;
+        const { search } = req.query;
+
+        if (search) {
+            return taskController.searchTasks(req, res);
+        }
 
         if (completed !== undefined) {
             return taskController.getAllTasksByStatus(req, res);
@@ -90,6 +95,19 @@ const taskController = {
             res.status(200).json(tasks);
         } catch (error) {
             res.status(500).json({ message: 'Error retrieving tasks by status', error });
+        }
+    },
+    searchTasks: async (req, res) => {
+        const { search } = req.query;
+
+        if (!search || search.trim() === '') {
+            return res.status(400).json({ message: 'Search query cannot be empty' });
+        }
+        try {
+            const tasks = await Task.searchTasks(search);
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ message: 'Error searching tasks', error });
         }
     }
 };

@@ -1,3 +1,4 @@
+const { search } = require('../app');
 const db = require('../db');
 
 module.exports = {
@@ -23,5 +24,8 @@ module.exports = {
     },
     getAllByStatus: async(status) => {
         return db('tasks').where({ completed: status }).select('*');
+    },
+    searchTasks: async (query) => {
+        return db('tasks').where('title', 'like', `%${query}%`).select('*');
     }
 };
