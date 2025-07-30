@@ -1,8 +1,14 @@
+const { get } = require('../app');
 const Task = require('../models/task.model');
 const taskSchema = require('../validations/task.schema');
 
-module.exports = {
+const taskController = {
     getAllTasks: async (req, res) => {
+        const { completed } = req.query;
+
+        if (completed !== undefined) {
+            return taskController.getAllTasksByStatus(req, res);
+        }
         try {
             const tasks = await Task.getAllTasks();
             res.status(200).json(tasks);
@@ -74,4 +80,18 @@ module.exports = {
             res.status(500).json({ message: 'Error marking task as completed', error });
         }
     },
+    getAllTasksByStatus: async (req, res) => {
+        const { completed } = req.query;
+        if (completed !== 'true' && completed !== 'false') {
+            return res.status(400).json({ message: 'Invalid status query parameter' });
+        }
+        try {
+            const tasks = await Task.getAllByStatus(completed === 'true');
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ message: 'Error retrieving tasks by status', error });
+        }
+    }
 };
+
+module.exports = taskController;

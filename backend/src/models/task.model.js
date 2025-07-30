@@ -20,6 +20,8 @@ module.exports = {
     markAsCompleted: async(id) => {
         const [updatedTask] = await db('tasks').where({ id }).update({ completed: true }).returning('*');
         return updatedTask;
+    },
+    getAllByStatus: async(status) => {
+        return db('tasks').where({ completed: status }).select('*');
     }
-
 };
