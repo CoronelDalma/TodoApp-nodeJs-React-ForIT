@@ -8,12 +8,6 @@ function TaskItem({ task, onDelete, onToggle, onEdit }) {
     };
 
     const handleEdit = (task) => {
-        /*const updatedTask = {
-            ...task,
-            title: prompt('Edit task title:', task.title),
-            description: prompt('Edit task description:', task.description),
-        };*/
-        console.log('Editing task:', task);
         onEdit(task.id, task);
     };
 

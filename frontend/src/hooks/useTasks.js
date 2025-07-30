@@ -39,8 +39,8 @@ export const useTasks = () => {
 
     const removeTask = async (taskId) => {
         try {
-            await deleteTask(taskId);
             setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+            await deleteTask(taskId);
         } catch (error) {
             console.error('Failed to delete task:', error);
         }

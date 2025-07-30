@@ -88,10 +88,11 @@ export const deleteTask = async (taskId) => {
         const response = await fetch(`${TASKS_URL}/${taskId}`, {
             method: 'DELETE',
         });
+
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return await response.json();
+        return true;
     } catch (error) {
         console.error('Error deleting task:', error);
         throw error;

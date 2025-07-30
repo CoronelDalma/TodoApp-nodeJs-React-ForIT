@@ -31,6 +31,12 @@ function App() {
     setSelectedTask(null);
   }
 
+  const handleRemoveTask = async (taskId) => {
+    if (window.confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+      await removeTask(taskId);
+    }
+  }
+
   return (
     <>
       <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '1rem' }}>
@@ -42,7 +48,7 @@ function App() {
         {showForm && <ModalContainer title={selectedTask ? 'Editar' : 'Agregar'} onClose={() => setShowForm(false)}>
             <TaskForm onSubmit={handleFormSubmit} task={selectedTask} onClose={() => setShowForm(false)} />
           </ModalContainer>}
-        <TaskList tasks={tasks} onDelete={removeTask} onToggle={toggleTaskCompletion} onEdit={handleEditTask} />
+        <TaskList tasks={tasks} onDelete={handleRemoveTask} onToggle={toggleTaskCompletion} onEdit={handleEditTask} />
       </div>
     </>
   )
