@@ -40,7 +40,7 @@ function App() {
         </div>
 
         {showForm && <ModalContainer title={selectedTask ? 'Editar' : 'Agregar'} onClose={() => setShowForm(false)}>
-            <TaskForm onSubmit={handleFormSubmit} task={selectedTask} />
+            <TaskForm onSubmit={handleFormSubmit} task={selectedTask} onClose={() => setShowForm(false)} />
           </ModalContainer>}
         <TaskList tasks={tasks} onDelete={removeTask} onToggle={toggleTaskCompletion} onEdit={handleEditTask} />
       </div>

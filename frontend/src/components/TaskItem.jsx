@@ -1,4 +1,4 @@
-function TaskItem({ task, onDelete, onToggle }) {
+function TaskItem({ task, onDelete, onToggle, onEdit }) {
     const handleDelete = () => {
         onDelete(task.id);
     };
@@ -7,14 +7,14 @@ function TaskItem({ task, onDelete, onToggle }) {
         onToggle(task.id);
     };
 
-    const handleEdit = () => {
-        const updatedTask = {
+    const handleEdit = (task) => {
+        /*const updatedTask = {
             ...task,
             title: prompt('Edit task title:', task.title),
             description: prompt('Edit task description:', task.description),
-        };
-        console.log('Editing task:', updatedTask);
-        //onEdit(task.id, updatedTask);
+        };*/
+        console.log('Editing task:', task);
+        onEdit(task.id, task);
     };
 
     return (

@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function TaskForm({ onSubmit, task = null }) {
+function TaskForm({ onSubmit, task = null, onClose }) {
     const [title, setTitle] = useState(task ? task.title : "");
     const [description, setDescription] = useState(task ? task.description : "");
+
+    useEffect(() => {
+        if (task) {
+            setTitle(task.title);
+            setDescription(task.description);
+        }
+    }, [task]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,7 +20,7 @@ function TaskForm({ onSubmit, task = null }) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="task-form">
             <input
                 type="text"
                 placeholder="Título"
@@ -28,6 +35,7 @@ function TaskForm({ onSubmit, task = null }) {
                 required
             ></textarea>
             <button type="submit">Guardar</button>
+            <button type="button" onClick={() => { setTitle(""); setDescription(""); onClose(); }}>Cancelar</button>
         </form>
     );
 }
