@@ -27,7 +27,7 @@ function TaskForm({ onSubmit, task = null }) {
                 onChange={(e) => setDescription(e.target.value)}
                 required
             ></textarea>
-            <button type="submit">Agregar Tarea</button>
+            <button type="submit">Guardar</button>
         </form>
     );
 }
