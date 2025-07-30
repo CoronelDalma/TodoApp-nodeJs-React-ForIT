@@ -46,7 +46,28 @@ export const useTasks = () => {
         }
     };
 
-    return { tasks, addTask, editTask, removeTask };
+    const toggleTaskCompletion = async (taskId) => {
+        const task = tasks.find((t) => t.id === taskId);
+        if (task) {
+            const updatedTask = {
+                title: task.title,
+                description: task.description,
+                completed: !task.completed,
+                createdAt: task.createdAt,
+            }
+            console.log('changing task:', task.completed, 'to', !task.completed);
+            await editTask(taskId, updatedTask);
+            setTasks((prevTasks) =>
+                prevTasks.map((task) =>
+                    task.id === taskId ? { ...task, completed: updatedTask.completed } : task
+                )
+            );
+            console.log('Tasks updated:', tasks);
+        }
+
+    };
+
+    return { tasks, addTask, editTask, removeTask, toggleTaskCompletion };
 };
 
 

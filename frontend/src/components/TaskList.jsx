@@ -1,11 +1,13 @@
-function TaskList({ tasks, onDelete }) {
+import TaskItem from "./TaskItem";
+
+function TaskList({ tasks, onDelete, onToggle }) {
+    if (!tasks || tasks.length === 0) {
+        return <p>No tasks available.</p>;
+    }
     return (
         <ul>
             {tasks.map((task) => (
-                <li key={task.id}>
-                    {task.title}
-                    <button onClick={() => onDelete(task.id)}>Eliminar</button>
-                </li>
+                <TaskItem key={task.id} task={task} onDelete={onDelete} onToggle={onToggle} />
             ))}
         </ul>
     );
