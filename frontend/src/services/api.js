@@ -3,7 +3,10 @@ const TASKS_URL = `${API}/tasks`;
 
 export const getTasks = async () => {
     try {
-        const response = await fetch(TASKS_URL);
+        const response = await fetch(TASKS_URL, {
+            method: 'GET',
+            cache: 'no-cache'
+        });
         if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
         }
