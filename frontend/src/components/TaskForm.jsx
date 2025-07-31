@@ -15,6 +15,10 @@ function TaskForm({ onSubmit, task = null, onClose }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!title.trim()) return;
+        if (!description || description.trim() == "") {
+            onSubmit({title});
+            return;
+        };
         onSubmit({ title, description });
         setTitle("");
         setDescription("");
@@ -33,7 +37,6 @@ function TaskForm({ onSubmit, task = null, onClose }) {
                 placeholder="Descripción"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                required
             ></textarea>
             <div className="form-actions">
                 <button type="submit">Guardar</button>

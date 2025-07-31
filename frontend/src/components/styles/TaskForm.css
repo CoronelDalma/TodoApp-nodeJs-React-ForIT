@@ -7,13 +7,13 @@
 .task-form input,
 .task-form textarea {
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
     border-radius: 4px;
 }
 
 .task-form input:focus,
 .task-form textarea:focus {
-    border-color: var(--button-hover-color);
+    border-color: var(--accent);
     outline: none;
 }
 

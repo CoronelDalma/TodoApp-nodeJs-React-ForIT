@@ -1,7 +1,5 @@
 .task-item {
-    border-bottom: 1px solid var(--card-highlight-color);
-    /*border-radius: 8px;
-    background-color: var(--card-background-color);*/
+    border-bottom: 1px solid var(--border);
 }
 .item-header {
     text-align: left;
@@ -17,7 +15,7 @@
 .item-title {
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--card-title-color);
+    color: var(--text);
     display: flex;
 }
 
@@ -35,7 +33,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--button-color);
+    color: var(--accent);
 }
 
 .task-actions {
@@ -46,10 +44,10 @@
 .task-actions button {
     background: none;
     border: none;
-    color: var(--button-color);
+    color: var(--accent);
 }
 
 .task-actions button:hover {
-    color: var(--button-hover-color);
+    color: var(--accent-hover);
 }
 

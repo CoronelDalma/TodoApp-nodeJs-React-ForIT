@@ -28,11 +28,10 @@ function App() {
   }
 
   const handleFormSubmit = async (task) => {
-    if (selectedTask) {
-      await editTask(selectedTask.id, task);
-    } else {
-      await addTask(task);
-    }
+    selectedTask 
+      ? await editTask(selectedTask.id, task)
+      : await addTask(task);
+  
     setShowForm(false);
     setSelectedTask(null);
   }
@@ -45,20 +44,37 @@ function App() {
 
   return (
     <>
-      <ThemeToggle />
-      <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '1rem' }}>
-        <div className='header'>
+      <header className='header'>
+        <h1>Todo App</h1>
+        <ThemeToggle />
+      </header>
+
+      <main style={{ maxWidth: '600px', margin: '0rem auto', padding: '1rem' }}>
+        <div className='title-app'>
           <h1>📝 Lista de Tareas</h1>
           <button onClick={handleCreateTask}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
         </div>
 
         <TaskFilters onFilterChange={setCurrentFilter} currentFilter={currentFilter} onSearch={setSearchText} />
 
-        {showForm && <ModalContainer title={selectedTask ? 'Editar' : 'Nueva Tarea'} onClose={() => setShowForm(false)}>
+        {showForm && (
+          <ModalContainer title={selectedTask ? 'Editar' : 'Nueva Tarea'} onClose={() => setShowForm(false)}>
             <TaskForm onSubmit={handleFormSubmit} task={selectedTask} onClose={() => setShowForm(false)} />
-          </ModalContainer>}
-        <TaskList tasks={tasks} onDelete={handleRemoveTask} onToggle={toggleTaskCompletion} onEdit={handleEditTask} />
-      </div>
+          </ModalContainer>
+        )}
+
+        <TaskList 
+          tasks={tasks} 
+          onDelete={handleRemoveTask} 
+          onToggle={toggleTaskCompletion} 
+          onEdit={handleEditTask} 
+        />
+      </main>
+
+      <footer>
+        <p>&copy; 2025 Coronel Dalma</p>
+      </footer>
+
     </>
   )
 }
