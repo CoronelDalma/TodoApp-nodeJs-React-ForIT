@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './styles/TaskForm.css';
 
 function TaskForm({ onSubmit, task = null, onClose }) {
     const [title, setTitle] = useState(task ? task.title : "");
@@ -34,8 +35,10 @@ function TaskForm({ onSubmit, task = null, onClose }) {
                 onChange={(e) => setDescription(e.target.value)}
                 required
             ></textarea>
-            <button type="submit">Guardar</button>
-            <button type="button" onClick={() => { setTitle(""); setDescription(""); onClose(); }}>Cancelar</button>
+            <div className="form-actions">
+                <button type="submit">Guardar</button>
+                <button type="button" onClick={() => { setTitle(""); setDescription(""); onClose(); }}>Cancelar</button>
+            </div>
         </form>
     );
 }

@@ -4,12 +4,18 @@ import TaskForm from './components/TaskForm'
 import TaskList from './components/TaskList'
 import './App.css'
 import ModalContainer from './components/ModalContainer'
+import ThemeToggle from './components/ThemeToggle'
+
+import './icons/icons' 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import TaskFilters from './components/TaskFilters'
 
 function App() {
   const { tasks, addTask, editTask, removeTask, toggleTaskCompletion } = useTasks();
   const [showForm, setShowForm] = useState(false);
-  //const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState('all');
 
   const handleCreateTask = () => {
     setShowForm(true);
@@ -39,13 +45,16 @@ function App() {
 
   return (
     <>
+      <ThemeToggle />
       <div style={{ maxWidth: '600px', margin: '2rem auto', padding: '1rem' }}>
-        <div>
+        <div className='header'>
           <h1>📝 Lista de Tareas</h1>
-          <button onClick={handleCreateTask}>{showForm ? 'Cancelar' : 'Agregar Tarea'}</button>
+          <button onClick={handleCreateTask}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
         </div>
 
-        {showForm && <ModalContainer title={selectedTask ? 'Editar' : 'Agregar'} onClose={() => setShowForm(false)}>
+        <TaskFilters onFilterChange={setCurrentFilter} currentFilter={currentFilter} onSearch={setSearchText} />
+
+        {showForm && <ModalContainer title={selectedTask ? 'Editar' : 'Nueva Tarea'} onClose={() => setShowForm(false)}>
             <TaskForm onSubmit={handleFormSubmit} task={selectedTask} onClose={() => setShowForm(false)} />
           </ModalContainer>}
         <TaskList tasks={tasks} onDelete={handleRemoveTask} onToggle={toggleTaskCompletion} onEdit={handleEditTask} />

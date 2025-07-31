@@ -1,0 +1,55 @@
+.task-item {
+    border-bottom: 1px solid var(--card-highlight-color);
+    /*border-radius: 8px;
+    background-color: var(--card-background-color);*/
+}
+.item-header {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.task-date {
+    font-size: 0.8rem;
+    color: var(--card-paragraph-color);
+
+}
+
+.item-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--card-title-color);
+    display: flex;
+}
+
+.item-title h3 {
+    margin: 0 0.5rem;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: var(--card-paragraph-color);
+    opacity: 0.6;
+}
+
+.details-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--button-color);
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-actions button {
+    background: none;
+    border: none;
+    color: var(--button-color);
+}
+
+.task-actions button:hover {
+    color: var(--button-hover-color);
+}
+
