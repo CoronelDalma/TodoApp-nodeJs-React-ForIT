@@ -1,21 +1,30 @@
-import { useState, useEffect } from 'react';
-import { getTasks, createTask, updateTask, deleteTask } from '../services/api';
+import { useState, useEffect, useCallback } from 'react';
+import { getTasks, createTask, updateTask, deleteTask, getTasksByStatus, searchTasks } from '../services/api';
+import { useDebounce } from './useDebounce';
 
-export const useTasks = () => {
+export const useTasks = (filter = 'all', searchText = '') => {
     const [tasks, setTasks] = useState([]);
+    const debouncedSearch = useDebounce(searchText, 500);
 
-    const fetchTasks = async () => {
+    const fetchTasks = useCallback(async () => {
+        let data;
         try {
-            const data = await getTasks();
+            if (debouncedSearch.trim()) {
+                data = await searchTasks(debouncedSearch);
+            } else if (filter === 'completed' || filter === 'pending') {
+                data = await getTasksByStatus(filter === 'completed');
+            } else {
+                data = await getTasks();
+            }
             setTasks(data);
         } catch (error) {
             console.error('Failed to fetch tasks:', error);
         }
-    };
+    }, [filter, debouncedSearch]);
 
     useEffect(() => {
         fetchTasks();
-    }, []);
+    }, [fetchTasks]);
 
     const addTask = async (task) => {
         try {

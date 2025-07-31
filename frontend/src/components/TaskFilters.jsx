@@ -29,11 +29,11 @@ function TaskFilters({ onFilterChange, currentFilter, onSearch }) {
                 <input
                     type="radio"
                     name="filter"
-                    value="active"
-                    checked={currentFilter === 'active'}
+                    value="pending"
+                    checked={currentFilter === 'pending'}
                     onChange={handleFilterChange}
                 />
-                Activas
+                Pendientes
                 </label>
                 <label>
                 <input

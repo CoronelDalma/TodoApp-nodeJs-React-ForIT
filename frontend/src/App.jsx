@@ -11,11 +11,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TaskFilters from './components/TaskFilters'
 
 function App() {
-  const { tasks, addTask, editTask, removeTask, toggleTaskCompletion } = useTasks();
   const [showForm, setShowForm] = useState(false);
   const [searchText, setSearchText] = useState('');
   const [selectedTask, setSelectedTask] = useState(null);
   const [currentFilter, setCurrentFilter] = useState('all');
+  const { tasks, addTask, editTask, removeTask, toggleTaskCompletion } = useTasks(currentFilter, searchText);
 
   const handleCreateTask = () => {
     setShowForm(true);
