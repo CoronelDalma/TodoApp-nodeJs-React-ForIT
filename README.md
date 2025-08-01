@@ -45,7 +45,7 @@ Una aplicación full-stack para gestionar tareas, desarrollada con **React + Vit
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/task-manager-app.git
+git clone https://github.com/CoronelDalma/TodoApp-nodeJs-React-ForIT.git
 cd todo-app-ForIT
 ```
 
