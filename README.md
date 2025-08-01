@@ -46,7 +46,7 @@ Una aplicación full-stack para gestionar tareas, desarrollada con **React + Vit
 
 ```bash
 git clone https://github.com/CoronelDalma/TodoApp-nodeJs-React-ForIT.git
-cd todo-app-ForIT
+cd TodoApp-nodeJs-React-ForIT
 ```
 
 ### 2. Instalar dependencias del backend
